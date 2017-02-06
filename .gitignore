@@ -1,0 +1,13 @@
+# IntelliJ IDEA
+*.iml
+/.idea
+target/
+/out
+
+# Eclipse
+/.settings
+/.classpath
+/.project
+
+# Others
+*.log
