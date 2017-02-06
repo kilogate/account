@@ -24,23 +24,24 @@ public class AccountEmailServiceTest {
     @Before
     public void startMailServer() {
         greenMail = new GreenMail(ServerSetup.SMTP);
-        greenMail.setUser("test@kilogate.com", "123456");
+        greenMail.setUser("receive@kilogate.com", "123456");
         greenMail.start();
     }
 
     @Test
     public void testSendMail() throws Exception {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("account-email.xml");
-        AccountEmailService accountEmailService = (AccountEmailService) ctx.getBean("accountEmailServicee");
+        AccountEmailService accountEmailService = (AccountEmailService) ctx.getBean("accountEmailService");
 
         String subject = "Test Subject";
         String htmlText = "<h3>Test</h3>";
 
-        accountEmailService.sendMail("test2@kilogate.com", subject, htmlText);
+        accountEmailService.sendMail("receive@kilogate.com", subject, htmlText);
 
         greenMail.waitForIncomingEmail(2000, 1);
 
         Message[] msgs = greenMail.getReceivedMessages();
+
         Assert.assertEquals(1, msgs.length);
         Assert.assertEquals(subject, msgs[0].getSubject());
         Assert.assertEquals(htmlText, GreenMailUtil.getBody(msgs[0]).trim());
