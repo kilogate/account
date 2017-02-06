@@ -17,6 +17,7 @@ import javax.mail.MessagingException;
 
 /**
  * Created by kilogate on 2017/2/4.
+ * Test email send
  */
 public class AccountEmailServiceTest {
     private GreenMail greenMail;
